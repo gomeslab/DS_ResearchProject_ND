@@ -1,0 +1,16 @@
+,deltaI,deltaR
+Decision Tree spec points,0.0077044,-0.0855425
+Decision Tree peak info,0.020490500000000002,-0.18705
+Decision Tree spec points and peak info,0.0077044,-0.0855425
+Random Forest spec points,0.01741628,-0.07590279999999998
+Random Forest peak info,0.02133458,-0.17121499999999998
+Random Forest spec points and peak info,0.014657071666666665,-0.07929162
+AdaBoost spec points,0.0023344666666666666,-0.032773000000000004
+AdaBoost peak info,0.0062902999999999995,-0.17431
+AdaBoost spec points and peak info,0.0043143999999999995,-0.0329098
+Gradient Boosting spec points,0.022488819467526393,-0.07163197410024146
+Gradient Boosting peak info,0.02256353805126499,-0.20657810551929487
+Gradient Boosting spec points and peak info,0.02247465385464508,0.9975487324081669
+Independent Random Forests spec points,0.0020563952055555556,-0.03408828555555555
+Independent Random Forests peak info,0.002583583222222222,-0.17616893968253963
+Independent Random Forests spec points and peak info,0.002066012033333334,-0.0351947958974359

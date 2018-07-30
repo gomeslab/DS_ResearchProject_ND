@@ -143,56 +143,72 @@ bias3 = linspace(-0.4, 0.5, 201);
 
 delta = -0.2 + 0.2*sqrt(-1);
 delta2 = -0.15 + 0.05*sqrt(-1);
-delta_emory = -0.109421667 + 0.0604 * sqrt(-1);
-delta_predicted = -0.1611 + sqrt(-1)*0.07857;
+delta_pred = -0.2010938616362285 + 0.05790756940568192 * sqrt(-1);
+delta_pred2 = -0.03007 + sqrt(-1)*0.011743;
 
 dispersion1 = [0.439, 0.3633, -13.7882];
 sf = 0.945;
-dispersion2 = [0.439, 0.3633, -13.7882];
+dispersion2 = [0.439, 0.4068 *sf ^2, -10.996 / sf ^4]; 
 
 
 test1 = kspec(vpCO, [0,0], bias3, delta, dispersion1);
-test2 = kspec(vpCO, [0,0], bias3, delta2, dispersion1);
-test3 = kspec(vpCO, [0,0], bias3, delta, dispersion2);
+test2 = kspec(vpCO, [0,0], bias3, delta, dispersion2);
+test3 = kspec(vpCO, [0,0], bias3, delta2, dispersion1);
 test4 = kspec(vpCO, [0,0], bias3, delta2, dispersion2);
-
-test_predicted = kspec(vpCO, [0,0], bias2, delta_predicted, dispersion2);
-test_pred_2 = kspec(vpCO, [0,0], bias2, delta2, dispersion2);
-test_emory = kspec(vpCO, [0,0], bias2, delta_emory, dispersion2);
+test5 = kspec(vpCO, [0,0], bias2, delta_pred, dispersion1);
+test6 = kspec(vpCO, [0,0], bias2, delta_pred, dispersion2);
+test7 = kspec(vpCO, [0,0], bias2, delta_pred2, dispersion1);
+test8 = kspec(vpCO, [0,0], bias2, delta_pred2, dispersion2);
 
 figure; 
-% plot(bias3, test1);
+plot(bias3, test1);
 hold on
-plot(bias3, test2);
-% plot(bias3, test3);
-plot(bias3, test4);
+plot(bias3, test2, '--');
+hold on 
+plot(bias3, test3);
+hold on 
+plot(bias3, test4, '--');
+hold on 
+plot(bias2, test5);
+hold on
+plot(bias2, test6, '--');
+hold on 
+plot(bias2, test7);
+hold on 
+plot(bias2, test8,'--');
+hold on 
 plot(bias, spec1);
-
-legend('Unscaled Dispersion', 'Scaled Dispersion', 'Experiment')
-
-figure; 
-plot(bias_exp2, expSpec2);
-hold on
-plot(bias2, test_predicted);
-plot(bias2, test_pred_2);
-plot(bias2, test_emory);
-legend('Experimental', 'Predicted phase and scaled dispersion', 'Previous Predicted Phase and scaled dispersion', 'Emory phase')
+legend('delta d1','delta d2', 'delta2 d1', 'delta2 d2' , 'delta_pred d1', 'delta_pred d2', 'delta_pred2 d1', 'delta_pred2 d2', 'Experiment')
+title('All')
 
 figure; 
-plot(bias_exp2, expSpec2);
+plot(bias2, test5);
 hold on
-plot(bias2, test_predicted);
-legend('Experimental', 'Predicted')
+plot(bias2, test6, '--');
+hold on 
+plot(bias2, test7);
+hold on 
+plot(bias2, test8,'--');
+hold on 
+plot(bias, spec1);
+legend('delta_pred d1', 'delta_pred d2', 'delta_pred2 d1', 'delta_pred2 d2', 'Experiment')
+title('Predicted')
+
+figure; 
+plot(bias2, test8,'--');
+hold on 
+plot(bias, spec1);
+legend('delta_pred2 d2', 'Experiment')
+title('Predicted with Dispersion')
 
 
-
-r2_pred_1 = sum((test_predicted-expSpec2).^2)
-r2_pred_2 = sum((test_pred_2 - expSpec2).^2)
-r2_pred_emory = sum((test_emory - expSpec2).^2)
-
-rmse_pred_1 = sqrt(mean((test_predicted-expSpec2).^2))
-rmse_pred_2 = sqrt(mean((test_pred_2 - expSpec2).^2))
-rmse_pred_emory = sqrt(mean((test_emory - expSpec2).^2))
+% r2_pred_1 = sum((test5-expSpec2).^2)
+% r2_pred_2 = sum((test6 - expSpec2).^2)
+% r2_pred_emory = sum((test7 - expSpec2).^2)
+% 
+% rmse_pred_1 = sqrt(mean((test5-expSpec2).^2))
+% rmse_pred_2 = sqrt(mean((test6 - expSpec2).^2))
+% rmse_pred_emory = sqrt(mean((test7 - expSpec2).^2))
 % Finding the four largest peaks in each. 
 
 % figure;
