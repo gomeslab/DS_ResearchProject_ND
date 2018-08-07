@@ -1,14 +1,14 @@
 %% Creating a model to predict deltaI and deltaR 
 
 % Defining parameters for simulation
-dsf = 0.8993; % dispersion scale factor 
+dsf = 0.9122372353064065; % dispersion scale factor 
 dispersion = [0.439, 0.4068 *dsf ^2, -10.996 / dsf ^4]; % coefficients for: E = E0 + ak^2 + bk^2
 abc = kconstants; % physical parameters of copper
 a0 = abc.a; % space between CO atoms
 nhex = 5; % radius of hex, number of COs from center diagonally
 nspec = 451;
 E = linspace(-0.4, 0.5, nspec); % energies
-sf =10; % scale factor, spacing between each CO (sf*a0) 
+sf =10; % scale factor, spacing between each Copper (sf*a0) 
 
 % Defining the geometry of artificial graphene lattice
 vp = khex(nhex, sf*a0,1); % position of COs
@@ -34,9 +34,10 @@ for i = 1:training_size
      waitbar(i/training_size, f)
 end
 
+close(f)
 %% Saving the training data
-save('/Users/emory/Documents/GitHub/DS_ResearchProject_ND/Training_Data/Graphene/ES_AG_Spec_data_180729_sf_0.8993.mat', 'training');
-csvwrite('/Users/emory/Documents/GitHub/DS_ResearchProject_ND/Training_Data/Graphene/ES_AG_Spec_data_180729_sf_0.8993.csv', training);
+save('/Users/emory/Documents/GitHub/DS_ResearchProject_ND/Training_Data/Graphene/ES_AG_Spec_data_180806_sf_0.91.mat', 'training');
+csvwrite('/Users/emory/Documents/GitHub/DS_ResearchProject_ND/Training_Data/Graphene/ES_AG_Spec_data_180806_sf_0.91.csv', training);
 %% Point Specs
 % Measurement with 10a spacing. % save for predicting data
 load 'Spec10a.mat'

@@ -201,7 +201,7 @@ rmse_pred_emory = sqrt(mean((test_emory - expSpec2).^2))
 % findpeaks(test2, bias3, 'sortstr', 'descend', 'npeaks', 4);
 %% Simulating training data with spec points, and training data with peak info
 
-sf = 0.8993;
+sf = 0.9122372353064065;
 dispersion2 =  [0.439, 0.4068 *sf ^2, -10.996 / sf ^4];
 
 nv = 451;
@@ -255,8 +255,8 @@ end
 close(f)
 
 %% saving training data 
-csvwrite('/Users/emory/Documents/GitHub/DS_ResearchProject_ND/Training_Data/Hexagon/HexagonTrainingData180727_PS_sf_0.8993_specPoints.csv', trainingA);
-csvwrite('/Users/emory/Documents/GitHub/DS_ResearchProject_ND/Training_Data/Hexagon/HexagonTrainingData180727_PS_sf_0.8993_peakinfo.csv', trainingB);
+csvwrite('/Users/emory/Documents/GitHub/DS_ResearchProject_ND/Training_Data/Hexagon/HexagonTrainingData180806_PS_sf_0.91_specPoints.csv', trainingA);
+csvwrite('/Users/emory/Documents/GitHub/DS_ResearchProject_ND/Training_Data/Hexagon/HexagonTrainingData180806_PS_sf_0.91_peakinfo.csv', trainingB);
 
 
 

@@ -1,16 +1,16 @@
 ,deltaI,deltaR
-Decision Tree spec points,0.0077044,-0.0855425
-Decision Tree peak info,0.020490500000000002,-0.18705
-Decision Tree spec points and peak info,0.0077044,-0.0855425
-Random Forest spec points,0.01741628,-0.07590279999999998
-Random Forest peak info,0.02133458,-0.17121499999999998
-Random Forest spec points and peak info,0.014657071666666665,-0.07929162
-AdaBoost spec points,0.0023344666666666666,-0.032773000000000004
-AdaBoost peak info,0.0062902999999999995,-0.17431
-AdaBoost spec points and peak info,0.0043143999999999995,-0.0329098
-Gradient Boosting spec points,0.022488819467526393,-0.07163197410024146
-Gradient Boosting peak info,0.02256353805126499,-0.20657810551929487
-Gradient Boosting spec points and peak info,0.02247465385464508,0.9975487324081669
-Independent Random Forests spec points,0.0020563952055555556,-0.03408828555555555
-Independent Random Forests peak info,0.002583583222222222,-0.17616893968253963
-Independent Random Forests spec points and peak info,0.002066012033333334,-0.0351947958974359
+Decision Tree spec points,0.009015,-0.071768
+Decision Tree peak info,0.01569681666666667,-0.15451
+Decision Tree spec points and peak info,0.009015,-0.071768
+Random Forest spec points,0.021063416666666675,-0.08498075555555555
+Random Forest peak info,0.01900864166666667,-0.16933600000000001
+Random Forest spec points and peak info,0.023802971666666665,-0.09753113333333333
+AdaBoost spec points,0.0022325333333333332,-0.041534999999999996
+AdaBoost peak info,0.0045838,-0.17013
+AdaBoost spec points and peak info,0.0022049,-0.040129000000000005
+Gradient Boosting spec points,0.02243998863786055,-0.07490459146217092
+Gradient Boosting peak info,0.023037374113448257,-0.18913743597000762
+Gradient Boosting spec points and peak info,0.022460560233196196,0.9978654795721046
+Independent Random Forests spec points,0.0017755485444444447,-0.03803345462962962
+Independent Random Forests peak info,0.0025216171111111115,-0.16683419444444444
+Independent Random Forests spec points and peak info,0.0024643447666666666,-0.03832050907407407

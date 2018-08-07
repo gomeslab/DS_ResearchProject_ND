@@ -8,7 +8,7 @@ a0 = abc.a; % space between CO atoms
 nhex = 5; % radius of hex, number of COs from center diagonally
 nspec = 451;
 E = linspace(-0.4, 0.5, nspec); % energies
-sf =10; % scale factor, spacing between each CO (sf*a0) 
+sf =10; % scale factor, spacing between each Copper (sf*a0) 
 
 % Defining the geometry of artificial graphene lattice
 vp = khex(nhex, sf*a0,1); % position of COs
@@ -37,7 +37,7 @@ end
 %% Saving the training data
 save('/Users/emory/Documents/GitHub/DS_ResearchProject_ND/Training_Data/Graphene/ES_AG_Spec_data_180729_sf_0.8993.mat', 'training');
 csvwrite('/Users/emory/Documents/GitHub/DS_ResearchProject_ND/Training_Data/Graphene/ES_AG_Spec_data_180729_sf_0.8993.csv', training);
-%% Point Specs on Hex lattices
+%% Point Specs
 % Measurement with 10a spacing. % save for predicting data
 load 'Spec10a.mat'
 h0=ksmooth(mean(didv0,2),5);
@@ -50,8 +50,10 @@ dsf = 0.8993; % dispersion scale factor
 a = 2.5477; nhex = 5; E = linspace(-0.4, 0.5, 451)'; 
 sf =10*dsf; vp = khex(nhex, sf*a,1); vspec=[0,sf*a/sqrt(3); sf*a/2,0]; 
 simh10=zeros(size(E,1),size(vspec,1));
+deltaR = 0.2246
+deltaI = -0.1262
 for ni=1:size(vspec,1)
-    simh10(:,ni) = kspec(vp, vspec(ni,:), E,(-.15+0.05*sqrt(-1)));
+    simh10(:,ni) = kspec(vp, vspec(ni,:), E,(deltaR+deltaI*sqrt(-1)));
 end
 
 %% Create Data for Experimental Predicting 

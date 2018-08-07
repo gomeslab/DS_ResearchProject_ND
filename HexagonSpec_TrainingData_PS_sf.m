@@ -143,11 +143,11 @@ bias3 = linspace(-0.4, 0.5, 201);
 
 delta = -0.2 + 0.2*sqrt(-1);
 delta2 = -0.15 + 0.05*sqrt(-1);
-delta_pred = -0.2010938616362285 + 0.05790756940568192 * sqrt(-1);
-delta_pred2 = -0.03007 + sqrt(-1)*0.011743;
+delta_pred = -0.05316361886680049 + 0.19356333090130784 * sqrt(-1);
+delta_pred2 = -0.009098879456736996 + sqrt(-1)*0.01291885852231403;
 
-dispersion1 = [0.439, 0.3633, -13.7882];
-sf = 0.945;
+dispersion1 = [0.439, 0.4068, -10.996]; 
+sf = 0.91;
 dispersion2 = [0.439, 0.4068 *sf ^2, -10.996 / sf ^4]; 
 
 
@@ -195,10 +195,12 @@ legend('delta_pred d1', 'delta_pred d2', 'delta_pred2 d1', 'delta_pred2 d2', 'Ex
 title('Predicted')
 
 figure; 
+plot(bias2, test7);
+hold on 
 plot(bias2, test8,'--');
 hold on 
 plot(bias, spec1);
-legend('delta_pred2 d2', 'Experiment')
+legend('Phase 2 d1', 'Phase 2 d2', 'Experiment')
 title('Predicted with Dispersion')
 
 
@@ -218,8 +220,8 @@ title('Predicted with Dispersion')
 % findpeaks(test2, bias3, 'sortstr', 'descend', 'npeaks', 4);
 %% Simulating training data with spec points, and training data with peak info
 
-%sf = 0.945;
-dispersion2 =  [0.439, 0.3633, -13.7882];
+
+dispersion2 =  [0.439, 0.4068, -10.996]; % original dispersion 
 
 nv = 451;
 bias_sim = linspace(-0.4, 0.5, nv);
@@ -275,8 +277,8 @@ end
 close(f)
 
 %% saving training data 
-csvwrite('/Users/emory/Documents/GitHub/DS_ResearchProject_ND/Training_Data/Hexagon/HexagonTrainingData180721_PS_sf_specPoints.csv', trainingA);
-csvwrite('/Users/emory/Documents/GitHub/DS_ResearchProject_ND/Training_Data/Hexagon/HexagonTrainingData180721_PS_sf_peakinfo.csv', trainingB);
+csvwrite('/Users/emory/Documents/GitHub/DS_ResearchProject_ND/Training_Data/Hexagon/HexagonTrainingData180802_PS_sf_specPoints.csv', trainingA);
+csvwrite('/Users/emory/Documents/GitHub/DS_ResearchProject_ND/Training_Data/Hexagon/HexagonTrainingData180802_PS_sf_peakinfo.csv', trainingB);
 
 
 
