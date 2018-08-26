@@ -51,8 +51,8 @@ dsf = 0.8993; % dispersion scale factor
 a = 2.5477; nhex = 5; E = linspace(-0.4, 0.5, 451)'; 
 sf =10*dsf; vp = khex(nhex, sf*a,1); vspec=[0,sf*a/sqrt(3); sf*a/2,0]; 
 simh10=zeros(size(E,1),size(vspec,1));
-deltaR = 0.2246
-deltaI = -0.1262
+deltaR = -0.08659537367345266
+deltaI = 0.1629937674981297 
 for ni=1:size(vspec,1)
     simh10(:,ni) = kspec(vp, vspec(ni,:), E,(deltaR+deltaI*sqrt(-1)));
 end
@@ -67,5 +67,12 @@ save('/Users/emory/Documents/GitHub/DS_ResearchProject_ND/Training_Data/Graphene
 csvwrite('/Users/emory/Documents/GitHub/DS_ResearchProject_ND/Training_Data/Graphene/ES_AG_Exp_data_180729_sf_0.8993.csv', all_cols);
 
 %% Plotting 
-figure; plot(v,h10tr,E*1000,simh10(:,1));
-figure; plot(v,h10br,E*1000,simh10(:,2));
+figure; 
+plot(v,h10tr);
+hold on 
+plot (E*1000,simh10(:,1));
+legend('experimental', 'simulated');
+figure; plot(v,h10br); 
+hold on 
+plot(E*1000,simh10(:,2));
+legend('experimental', 'simulated');
