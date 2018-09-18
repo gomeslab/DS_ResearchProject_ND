@@ -40,5 +40,4 @@ line=[line1,line2,line3,line4,line5,line6];
 line=cell2mat(line');
 line=uniquetol(line,'ByRows',true);
 
-% nothing
 % plot(line(:,1), line(:,2), 'xr', 'MarkerSize', 10, 'LineStyle', 'None')
