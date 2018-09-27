@@ -5,82 +5,43 @@
 % In this training data we will save the peak information for the four
 % largest peaks in each simulation.
 
-
-fn1 = '2016-08-01 Hexaxgonal Corral/';
-
-cd(fn1)
-%%
-
-dv5 = 5*10^-3;
-mpp = 0.1;
+%% Loading and Plotting Data
 
 % Load the data
-a = kdat('BiasSpec001.dat');
-a1 = kdat('BiasSpec002.dat');
+a1 = kdat('BiasSpec001.dat');
 a2 = kdat('BiasSpec003.dat');
 
 %Average forward and backward
-spec1 = 0.5*(a.Data(:,3)+a.Data(:,5)); 
-spec2 = 0.5*(a1.Data(:,3)+a1.Data(:,5));  %only 201 points
-spec3 = 0.5*(a2.Data(:,3)+a2.Data(:,5));
+spec1 = 0.5*(a1.Data(:,3)+a1.Data(:,5)); 
+spec2 = 0.5*(a2.Data(:,3)+a2.Data(:,5));
 
 %Loading the bare Cu spec
 nv = 501;
 nv2 = 451;
 b1a = k3ds('GridSpec001.3ds');
-dV = 5*10^-3;
-b1=reshape(b1a.LIXf,[100,nv]);
-dataCu=mean(b1)'*10^9;
-
-%Ignoring spec2, since it has a different number of points
-spec1 = spec1*10^9;
-spec3 = spec3*10^9;
+b1=reshape(b1a.LIX,[100,nv]);
+dataCu=mean(b1)';
 
 %Normalize by bare Cu
 spec1 = spec1./dataCu;
-spec3 = spec3./dataCu;
+spec2 = spec2./dataCu;
 
-bias = a.Data(:,1);
-nv = 201;
-bias3 = linspace(-0.4, 0.5, nv);
-bias4 = linspace(-0.4, 0.5, nv2);
-expSpec = 0.5*(spec1 + spec3);
+bias = a1.Data(:,1);
+expSpec = 0.5*(spec1 + spec2);
 
 %First need spec points above E = -0.4 only
 bias_exp2 = bias(bias>=-0.4);
-bias_exp3 = linspace(-0.25, 0.25, nv);
 expSpec2 = expSpec(bias>= -0.4);
-
-% %Now need to downsample
-% expSpec3 = interp1(bias_exp2, expSpec2, bias3);
-% expSpec4 = interp1(bias_exp2, expSpec2, bias_exp3);
-
-
-
-close all
-% figure;
-% plot(bias, spec3+1)
-% hold on
-% plot(bias, spec1)
-%  
-% figure;
-% findpeaks(spec1, 'MinPeakProminence', mpp)
-% 
-% figure;
-% findpeaks(spec3, 'MinPeakProminence', mpp)
-
 
 %Checking that the original and downsampled specs look the same
 figure; 
 plot(bias_exp2, expSpec2);
-% hold on
-% plot(bias_exp3, expSpec4);
 
 % csvwrite('/Users/lauracollins/Desktop/DS_ResearchProject_ND/HexagonExperimentalData053118_v2.csv', expSpec4);
 % csvwrite('/Users/lauracollins/Desktop/DS_ResearchProject_ND/HexagonExperimentalData053118_specPoints.csv', expSpec3);
 
 %All spec values at energies above -400mV without downsampling
-csvwrite('/Users/emory/Documents/GitHub/DS_ResearchProject_ND/HexagonExperimentalData071018_v4.csv', expSpec2');
+%csvwrite('/Users/emory/Documents/GitHub/DS_ResearchProject_ND/HexagonExperimentalData071018_v4.csv', expSpec2');
 
 %% Want to compare the experimental specs to simulated
 % First peaks are a bit small, and there may be additional peaks in the
@@ -90,7 +51,6 @@ a0 = abc.a;
 close all
 hex1 = hexagon(1);
 hex2 = hexagon2(1);
-mpp = 0.1;
 bias_limit = -0.4;
 
 x = linspace(-90,90,256);
@@ -108,9 +68,9 @@ scatter(hex1(:,1), hex1(:,2))
 axis image
 
 hold on
-% scatter(hex2(:,1), hex2(:,2))
+scatter(hex2(:,1), hex2(:,2))
 
-%Load the points from hexagon.ngef -- were parsed using python notebook 
+%% Load the points from hexagon.ngef -- were parsed using python notebook 
 hex_exp = csvread('/Users/emory/Documents/GitHub/DS_ResearchProject_ND/Training_Data/Hexagon/NewHexagonNGEFPoints.csv', 1,1);
 
 %This is in nm, convert to Angstroms
@@ -277,7 +237,7 @@ end
 
 close(f)
 
-<<<<<<< HEAD
+
 %% 
 csvwrite('/Users/lauracollins/Desktop/DS_ResearchProject_ND/Training_Data/Hexagon/HexagonTrainingData071218_v10_E0fixed_specPoints.csv', trainingA);
 csvwrite('/Users/lauracollins/Desktop/DS_ResearchProject_ND/Training_Data/Hexagon/HexagonTrainingData071218_v10_E0fixed_peakinfo.csv', trainingB);
@@ -359,11 +319,11 @@ close(f)
 %% 
 csvwrite('/Users/lauracollins/Desktop/DS_ResearchProject_ND/Training_Data/Hexagon/HexagonTrainingData071318_v11_E0Mfixed_specPoints.csv', trainingA);
 csvwrite('/Users/lauracollins/Desktop/DS_ResearchProject_ND/Training_Data/Hexagon/HexagonTrainingData071318_v11_E0Mfixed_peakinfo.csv', trainingB);
-=======
+
 %%
 csvwrite('/Users/emory/Documents/GitHub/DS_ResearchProject_ND/Training_Data/Hexagon/HexagonTrainingData071018_v9_specPoints.csv', trainingA);
 csvwrite('/Users/emory/Documents/GitHub/DS_ResearchProject_ND/Training_Data/Hexagon/HexagonTrainingData071018_v9_peakinfo.csv', trainingB);
->>>>>>> 2d9994974f9bb822f615d69b7c53152c68e3fdc7
+
 
 
 %% Simulating training data with spec points, and training data with peak info
@@ -380,7 +340,7 @@ vspec = [0,0];
 abc = kconstants;
 a0 = abc.a;
 
-<<<<<<< HEAD
+
 training_size = 12000;
 
 rng('default'); 
@@ -526,7 +486,7 @@ close(f)
 %% 
 csvwrite('/Users/lauracollins/Desktop/DS_ResearchProject_ND/Training_Data/Hexagon/HexagonTrainingData071318_v13_E0MaDifixed_specPoints.csv', trainingA);
 csvwrite('/Users/lauracollins/Desktop/DS_ResearchProject_ND/Training_Data/Hexagon/HexagonTrainingData071318_v13_E0MaDifixed_peakinfo.csv', trainingB);
-=======
+
 % training_size = 12000;
 % 
 % rng('default'); 
@@ -591,7 +551,7 @@ csvwrite('/Users/lauracollins/Desktop/DS_ResearchProject_ND/Training_Data/Hexago
 %% Simulating training data with spec points, and training data with peak info
 % Using random phases and dispersion values. 
 % Using a fixed E_0 and mstar 
->>>>>>> 2d9994974f9bb822f615d69b7c53152c68e3fdc7
+
 
 % sf = 0.945;
 % dispersion2 = [0.439, 0.4068*(sf^2), -10.996*(sf^4)];
@@ -830,14 +790,14 @@ dv5 = 5*10^-3;
 mpp = 0.1;
 
 % Load the data
-a = kdat('BiasSpec001.dat');
+a1 = kdat('BiasSpec001.dat');
 a1 = kdat('BiasSpec002.dat');
 a2 = kdat('BiasSpec003.dat');
 
 %Average forward and backward
-spec1 = 0.5*(a.Data(:,3)+a.Data(:,5)); 
+spec1 = 0.5*(a1.Data(:,3)+a1.Data(:,5)); 
 spec2 = 0.5*(a1.Data(:,3)+a1.Data(:,5));  %only 201 points
-spec3 = 0.5*(a2.Data(:,3)+a2.Data(:,5));
+spec2 = 0.5*(a2.Data(:,3)+a2.Data(:,5));
 
 %Loading the bare Cu spec
 nv = 501;
@@ -849,17 +809,17 @@ dataCu=mean(b1)'*10^9;
 
 %Ignoring spec2, since it has a different number of points
 spec1 = spec1*10^9;
-spec3 = spec3*10^9;
+spec2 = spec2*10^9;
 
 %Normalize by bare Cu
 spec1 = spec1./dataCu;
-spec3 = spec3./dataCu;
+spec2 = spec2./dataCu;
 
-bias = a.Data(:,1);
+bias = a1.Data(:,1);
 nv = 201;
 bias3 = linspace(-0.4, 0.5, nv);
 bias4 = linspace(-0.4, 0.5, nv2);
-expSpec = 0.5*(spec1 + spec3);
+expSpec = 0.5*(spec1 + spec2);
 
 %First need spec points above E = -0.4 only
 bias_exp2 = bias(bias>=-0.4);
