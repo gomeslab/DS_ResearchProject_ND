@@ -277,7 +277,11 @@ end
 
 close(f)
 
+<<<<<<< HEAD:Laura and Emory Code/HexagonSpec_TrainingData_v4.m
 <<<<<<< HEAD:HexagonSpec_TrainingData_v4.m
+=======
+
+>>>>>>> d6143e5a465393bb4ebd37ac8de20c641266a93e:Laura and Emory Code/HexagonSpec_TrainingData_v4.m
 =======
 
 >>>>>>> d6143e5a465393bb4ebd37ac8de20c641266a93e:Laura and Emory Code/HexagonSpec_TrainingData_v4.m
@@ -366,7 +370,11 @@ csvwrite('/Users/lauracollins/Desktop/DS_ResearchProject_ND/Training_Data/Hexago
 %%
 csvwrite('/Users/emory/Documents/GitHub/DS_ResearchProject_ND/Training_Data/Hexagon/HexagonTrainingData071018_v9_specPoints.csv', trainingA);
 csvwrite('/Users/emory/Documents/GitHub/DS_ResearchProject_ND/Training_Data/Hexagon/HexagonTrainingData071018_v9_peakinfo.csv', trainingB);
+<<<<<<< HEAD:Laura and Emory Code/HexagonSpec_TrainingData_v4.m
 <<<<<<< HEAD:HexagonSpec_TrainingData_v4.m
+=======
+
+>>>>>>> d6143e5a465393bb4ebd37ac8de20c641266a93e:Laura and Emory Code/HexagonSpec_TrainingData_v4.m
 =======
 
 >>>>>>> d6143e5a465393bb4ebd37ac8de20c641266a93e:Laura and Emory Code/HexagonSpec_TrainingData_v4.m
@@ -386,7 +394,11 @@ vspec = [0,0];
 abc = kconstants;
 a0 = abc.a;
 
+<<<<<<< HEAD:Laura and Emory Code/HexagonSpec_TrainingData_v4.m
 <<<<<<< HEAD:HexagonSpec_TrainingData_v4.m
+=======
+
+>>>>>>> d6143e5a465393bb4ebd37ac8de20c641266a93e:Laura and Emory Code/HexagonSpec_TrainingData_v4.m
 =======
 
 >>>>>>> d6143e5a465393bb4ebd37ac8de20c641266a93e:Laura and Emory Code/HexagonSpec_TrainingData_v4.m
@@ -600,7 +612,11 @@ csvwrite('/Users/lauracollins/Desktop/DS_ResearchProject_ND/Training_Data/Hexago
 %% Simulating training data with spec points, and training data with peak info
 % Using random phases and dispersion values. 
 % Using a fixed E_0 and mstar 
+<<<<<<< HEAD:Laura and Emory Code/HexagonSpec_TrainingData_v4.m
 <<<<<<< HEAD:HexagonSpec_TrainingData_v4.m
+=======
+
+>>>>>>> d6143e5a465393bb4ebd37ac8de20c641266a93e:Laura and Emory Code/HexagonSpec_TrainingData_v4.m
 =======
 
 >>>>>>> d6143e5a465393bb4ebd37ac8de20c641266a93e:Laura and Emory Code/HexagonSpec_TrainingData_v4.m
