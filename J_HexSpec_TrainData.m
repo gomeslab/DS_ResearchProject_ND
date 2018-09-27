@@ -71,7 +71,7 @@ hold on
 scatter(hex2(:,1), hex2(:,2))
 
 %% Load the points from hexagon.ngef -- were parsed using python notebook 
-hex_exp = csvread('/Users/emory/Documents/GitHub/DS_ResearchProject_ND/Training_Data/Hexagon/NewHexagonNGEFPoints.csv', 1,1);
+hex_exp = csvread('Training_Data/Hexagon/NewHexagonNGEFPoints.csv', 1,1);
 
 %This is in nm, convert to Angstroms
 hex_exp = hex_exp*10;
@@ -97,8 +97,8 @@ figure;
 imagesc(x,x,topofile.Zf)
 axis image 
 hold on
-scatter(hex1(:,1), hex1(:,2))
-scatter(hex_exp2(:,1), hex_exp2(:,2),  'LineWidth', 20)
+scatter(hex1(:,1), hex1(:,2),5,'k')
+scatter(hex_exp2(:,1), hex_exp2(:,2))
 
 vpCO = hex_exp2;
 
