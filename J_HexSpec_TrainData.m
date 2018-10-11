@@ -77,8 +77,12 @@ line(hex_exp(:,1), hex_exp(:,2),'marker','o','color','b','markersize',10,'linest
 %% Comparing Data to Simulation
 
 % Simulation parameters
+constants = kconstants;
+a0 = constants.a;  % Cu lattice spacing
+
 vpCO = hexagon_v2(a0);
-delta = -0.125 + 0.060*1i;
+%delta = -0.125 + 0.060*1i;
+delta = -0.13054543+0.08995103*1i;
 sf = 0.948;
 dispersion = [0.439, 0.4068*(sf^2), -10.996/(sf^4)];
  
@@ -92,17 +96,17 @@ axis square
 legend('Prediction', 'Experiment')
 
 %% Creating large set of training data from simulated data
-
+tic
 % Simulation parameters
-training_size = 100;
+training_size = 10000;
 
 % Dispersion
 sf = 0.948;
 dispersion = [0.439, 0.4068*(sf^2), -10.996/(sf^4)];
 
 % Bias Voltage
-nv = 451;
-bias_sim = linspace(-0.4, 0.5, nv);
+nv = 401;
+bias_sim = linspace(-0.3, 0.5, nv);
 
 % CO geometry
 constants = kconstants;
@@ -133,6 +137,8 @@ for i = 1:training_size
     waitbar(i/training_size, f)
 end
 close(f)
+toc
 
-% Writing the data to CSV file
-% csvwrite('Training_Data/Hexagon/HexTrainingData180927.csv', trainingData);
+%% Writing the data to CSV file
+%csvwrite('Training_Data/Hexagon/J_HexTrainData_1.csv', trainingData);
+csvwrite('Training_Data/Hexagon/J_HexBias_1.csv', bias_sim);
