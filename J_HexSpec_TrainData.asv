@@ -188,7 +188,7 @@ for i=1:ndeltas
     error(i) = sum((PredictSpec - limExpSpec).^2);
 end
 plot(max_features, error);
-% best max_features is probably to leave at max number
+% best max_features is 
 
 %% Changing max_features
 % delta_rf = [-0.15322 , 0.052083];
@@ -209,13 +209,7 @@ plot(max_features, error);
 % PredictSpec = kspec(vpCO, [0,0], limVoltage, delta, dispersion);
 % figure; plot(limVoltage, [PredictSpec, limExpSpec]);
 
-%% Ideal Value of delta compared to actual graph
 
-delta_rf = [-0.114451 , 0.0866534];
-delta = delta_rf(1,1) + delta_rf(1,2)*1i;
-PredictSpec = kspec(vpCO, [0,0], limVoltage, delta, dispersion);
-figure; plot(limVoltage, [PredictSpec, limExpSpec]);
 
-error = sum((PredictSpec - limExpSpec).^2);
 
 
