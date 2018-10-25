@@ -218,4 +218,11 @@ figure; plot(limVoltage, [PredictSpec, limExpSpec]);
 
 error = sum((PredictSpec - limExpSpec).^2);
 
+%%
 
+delta_rf = [-0.1358 , 0.1014];
+delta = delta_rf(1,1) + delta_rf(1,2)*1i;
+PredictSpec = kspec(vpCO, [0,0], limVoltage, delta, dispersion);
+figure; plot(limVoltage, [PredictSpec, limExpSpec]);
+
+error = sum((PredictSpec - limExpSpec).^2);
