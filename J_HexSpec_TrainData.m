@@ -122,7 +122,6 @@ DeltaValues = rand([training_size,2]);
 DeltaValues(:,1) = -DeltaValues(:,1)*pi/2;
 
 
-np = 4;
 trainingData = zeros(training_size, (2 + nv));
 
 f = waitbar(0, 'Calculating Simulated Data');
