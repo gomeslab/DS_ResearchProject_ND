@@ -77,8 +77,12 @@ line(hex_exp(:,1), hex_exp(:,2),'marker','o','color','b','markersize',10,'linest
 %% Comparing Data to Simulation
 
 % Simulation parameters
+constants = kconstants;
+a0 = constants.a;  % Cu lattice spacing
+
 vpCO = hexagon_v2(a0);
-delta = -0.125 + 0.060*1i;
+%delta = -0.125 + 0.060*1i;
+delta = -0.13054543+0.08995103*1i;
 sf = 0.948;
 dispersion = [0.439, 0.4068*(sf^2), -10.996/(sf^4)];
  
@@ -92,17 +96,17 @@ axis square
 legend('Prediction', 'Experiment')
 
 %% Creating large set of training data from simulated data
-
+tic
 % Simulation parameters
-training_size = 100;
+training_size = 10000;
 
 % Dispersion
 sf = 0.948;
 dispersion = [0.439, 0.4068*(sf^2), -10.996/(sf^4)];
 
 % Bias Voltage
-nv = 451;
-bias_sim = linspace(-0.4, 0.5, nv);
+nv = 401;
+bias_sim = linspace(-0.3, 0.5, nv);
 
 % CO geometry
 constants = kconstants;
@@ -132,6 +136,92 @@ for i = 1:training_size
     waitbar(i/training_size, f)
 end
 close(f)
+toc
 
-% Writing the data to CSV file
-% csvwrite('Training_Data/Hexagon/HexTrainingData180927.csv', trainingData);
+%% Writing the data to CSV file
+%csvwrite('Training_Data/Hexagon/J_HexTrainData_1.csv', trainingData);
+csvwrite('Training_Data/Hexagon/J_HexBias_1.csv', bias_sim);
+
+
+%% Error when changing parameters in Hex_RF
+% Changing max_depth
+
+delta_rf = [ -0.13281288 , 0.13383751 ; -0.14122301 , 0.09551758; -0.13382613 , 0.09720693; -0.13054543 , 0.08995103; -0.13054543 , 0.08995103; -0.13054543 , 0.08995103];
+
+max_depth = [5; 10; 15; 20; 40; 70];
+
+ndeltas=length(max_depth);
+error = zeros(ndeltas);
+for i=1:ndeltas
+    delta = delta_rf(i,1) + delta_rf(i,2)*1i;
+    PredictSpec = kspec(vpCO, [0,0], limVoltage, delta, dispersion); 
+    error(i) = sum((PredictSpec - limExpSpec).^2);
+end
+plot( max_depth, error);
+% the best max_depth is 20 %
+
+%% Changing n_estimators
+delta_rf = [-0.096144 , 0.041011; -0.096144 , 0.041011; -0.094166 , 0.06210067; -0.1156495 , 0.0700015; -0.10519 , 0.0706376; -0.114451 ,  0.0866534;-0.11435825 , 0.08401255; -0.1257298 ,  0.08903692; -0.13054543 , 0.08995103; -0.12842967 , 0.09609838; -0.12761736 , 0.09774626; -0.13009329 , 0.10102789];
+n_estimators = [1; 2; 3; 4; 5; 10; 20; 25; 30; 40; 50; 100];
+
+ndeltas=length(n_estimators);
+error = zeros(ndeltas, 1);
+for i=1:ndeltas
+    delta = delta_rf(i,1) + delta_rf(i,2)*1i;
+    PredictSpec = kspec(vpCO, [0,0], limVoltage, delta, dispersion); 
+    error(i) = sum((PredictSpec - limExpSpec).^2);
+end
+plot(n_estimators, error);
+% the best n_estimators is around 10 or 20
+
+
+%% Changing max_features
+delta_rf = [-0.1393253  0.1158945; -0.1331034  0.1005136; -0.1371662 , 0.1181083; -0.1225858 , 0.0937325; -0.161327 , 0.0853384; -0.1301926 , 0.100274; -0.1219579 , 0.0957039; -0.1365582 , 0.08739105; -0.1321002 , 0.1009435; -0.1273228 , 0.0958089; -0.1138194 , 0.0956431; -0.1218518 , 0.0983424];
+max_features = [10; 30; 50; 75; 100; 125; 150; 200; 250; 300; 350; 400];
+
+ndeltas=length(max_features);
+error = zeros(ndeltas, 1);
+for i=1:ndeltas
+    delta = delta_rf(i,1) + delta_rf(i,2)*1i;
+    PredictSpec = kspec(vpCO, [0,0], limVoltage, delta, dispersion); 
+    error(i) = sum((PredictSpec - limExpSpec).^2);
+end
+plot(max_features, error);
+% best max_features is probably to leave at max number
+
+%% Changing max_features
+% delta_rf = [-0.15322 , 0.052083];
+% max_features = [1];
+% 
+% ndeltas=length(max_features);
+% error = zeros(ndeltas, 1);
+% for i=1:ndeltas
+%     delta = delta_rf(i,1) + delta_rf(i,2)*1i;
+%     PredictSpec = kspec(vpCO, [0,0], limVoltage, delta, dispersion); 
+%     error(i) = sum((PredictSpec - limExpSpec).^2);
+% end
+% figure; plot(limVoltage, [PredictSpec, limExpSpec]);
+% 
+% 
+% delta_rf = [-0.13054543 , 0.08995103];
+% delta = delta_rf(i,1) + delta_rf(i,2)*1i;
+% PredictSpec = kspec(vpCO, [0,0], limVoltage, delta, dispersion);
+% figure; plot(limVoltage, [PredictSpec, limExpSpec]);
+
+%% Ideal Value of delta compared to actual graph
+
+delta_rf = [-0.114451 , 0.0866534];
+delta = delta_rf(1,1) + delta_rf(1,2)*1i;
+PredictSpec = kspec(vpCO, [0,0], limVoltage, delta, dispersion);
+figure; plot(limVoltage, [PredictSpec, limExpSpec]);
+
+error = sum((PredictSpec - limExpSpec).^2);
+
+%%
+
+delta_rf = [-0.1358 , 0.1014];
+delta = delta_rf(1,1) + delta_rf(1,2)*1i;
+PredictSpec = kspec(vpCO, [0,0], limVoltage, delta, dispersion);
+figure; plot(limVoltage, [PredictSpec, limExpSpec]);
+
+error = sum((PredictSpec - limExpSpec).^2);
